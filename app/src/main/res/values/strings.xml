@@ -5,4 +5,22 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="nike_epic_react_flyknit">Nike Epic React Flyknit</string>
+    <string name="_6_photos">6 Photos</string>
+    <string name="Rp2279000">Rp2.279.000</string>
+    <string name="remainingstock5">There are 5 remaining in stock</string>
+    <string name="content_text">The Nike Epic React Flyknit Mens Running Shoe provides crazy comfort that lasts as long as you can run. Its Nike React foam cushioning is responsive yet lightweight, durable yet soft. This attraction of opposites creates a sensation that not only enhances the feeling of moving forwards, but makes running feel fun, too.</string>
+    <string name="spesifikasi">Details</string>
+    <string name="availablesizes">Available Sizes</string>
+    <string name="sizes">US 7.5\nUS 8\nUS 10\nUS 10.5\nUS 13</string>
+    <string name="availablecolors">Available Colors</string>
+    <string name="colors">College Navy/Racer Blue/Pink Blast/College Navy\nWhite/Racer Blue/White\nBlack/Racer Blue/Black\nBlack/Dark Grey/Pure Platinum/Black\nWolf Grey/Cool Grey/Pure Platinum/White</string>
+    <string name="sold_by">Sold By</string>
+    <string name="nike">NIKE</string>
+    <string name="buy">Buy</string>
 </resources>
