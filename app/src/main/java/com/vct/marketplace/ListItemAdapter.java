@@ -45,7 +45,7 @@ public class ListItemAdapter extends RecyclerView.Adapter<ListItemAdapter.Catego
         holder.tvRemarks.setText(getListItems().get(position).getName());
 
         Glide.with(context)
-                .load(getListItems().get(position).getPhoto())
+                .load(getListItems().get(position).getImg())
                 .override(55, 55)
                 .crossFade()
                 .into(holder.imgPhoto);

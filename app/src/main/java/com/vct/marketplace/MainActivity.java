@@ -7,6 +7,8 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,11 +19,16 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
+
+    private RecyclerView rvCategory;
+    private ArrayList<Items> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +53,19 @@ public class MainActivity extends AppCompatActivity
 
         TextView userEmail = header.findViewById(R.id.userEmail);
         userEmail.setText(user.getEmail());
+
+        rvCategory = findViewById(R.id.rv_category);
+        rvCategory.setHasFixedSize(true);
+
+        list = new ArrayList<>();
+        list.addAll(ItemData.getListData());
+
+        showRecyclerList();
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -100,5 +115,42 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void showSelectedItem(Items item){
+        Intent intent = new Intent(this, ItemDetailActivity.class);
+        String name  = item.getName();
+        String img = item.getImg();
+        String sizes = item.getSizes();
+        String desc = item.getDesc();
+        String colors = item.getColors();
+        String profile = item.getProfile();
+        String seller = item.getSeller();
+        String price = item.getPrice();
+        String stock = item.getStock();
+        intent.putExtra("itemName",name);
+        intent.putExtra("itemImg",img);
+        intent.putExtra("itemSizes",sizes);
+        intent.putExtra("itemDesc",desc);
+        intent.putExtra("itemColors",colors);
+        intent.putExtra("sellerProfile",profile);
+        intent.putExtra("sellerName",seller);
+        intent.putExtra("itemPrice",price);
+        intent.putExtra("itemStock",stock);
+        startActivity(intent);
+    }
+
+    private void showRecyclerList(){
+        rvCategory.setLayoutManager(new LinearLayoutManager(this));
+        ListItemAdapter listItemAdapter = new ListItemAdapter(this);
+        listItemAdapter.setListItems(list);
+        rvCategory.setAdapter(listItemAdapter);
+
+        ItemClickSupport.addTo(rvCategory).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                showSelectedItem(list.get(position));
+            }
+        });
     }
 }

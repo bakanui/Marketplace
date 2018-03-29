@@ -116,12 +116,13 @@ public class SignupActivity extends AppCompatActivity {
     public void onSignupSuccess() {
         _signupButton.setEnabled(true);
         setResult(RESULT_OK, null);
+        Toast.makeText(getBaseContext(), "Registration successful.", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
         startActivity(intent);
     }
 
     public void onSignupFailed() {
-        Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), "Registration failed.", Toast.LENGTH_LONG).show();
 
         _signupButton.setEnabled(true);
     }

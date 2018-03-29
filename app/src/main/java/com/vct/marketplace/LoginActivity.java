@@ -121,7 +121,6 @@ public class LoginActivity extends AppCompatActivity {
         if (requestCode == REQUEST_SIGNUP) {
             if (resultCode == RESULT_OK) {
 
-                // TODO: Implement successful signup logic here
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
             }
@@ -167,5 +166,15 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         return valid;
+    }
+    @Override
+    protected void onStart(){
+        super.onStart();
+        mAuth.addAuthStateListener(firebaseAuthListener);
+    }
+    @Override
+    protected void onStop(){
+        super.onStop();
+        mAuth.removeAuthStateListener(firebaseAuthListener);
     }
 }

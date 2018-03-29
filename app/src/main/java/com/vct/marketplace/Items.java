@@ -39,13 +39,6 @@ public class Items {
         this.sizes = sizes;
     }
 
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
 
     public String getColors() {
         return colors;
@@ -84,6 +77,6 @@ public class Items {
     }
 
     public void setStock(String stock) {
-        this.price = stock;
+        this.stock = stock;
     }
 }

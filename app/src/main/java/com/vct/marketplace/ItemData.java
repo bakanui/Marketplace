@@ -15,8 +15,8 @@ public class ItemData {
                     "US 7.5\\nUS 8\\nUS 10\\nUS 10.5\\nUS 13",
                     "College Navy/Racer Blue/Pink Blast/College Navy\nWhite/Racer Blue/White\nBlack/Racer Blue/Black\nBlack/Dark Grey/Pure Platinum/Black\nWolf Grey/Cool Grey/Pure Platinum/White",
                     "NIKE",
-                    "@drawable/epicreactflyknitrunningshoe",
-                    "@drawable/nike_logo"}
+                    "epicreactflyknitrunningshoe",
+                    "nike_logo"}
 
     };
     public static ArrayList<Items> getListData() {
