@@ -5,7 +5,7 @@ package com.vct.marketplace;
  */
 
 public class Items {
-    private String name, img, photo, sizes, desc, colors, profile, seller;
+    private String name, img, photo, sizes, desc, colors, profile, seller, price, stock;
 
     public String getName() {
         return name;
@@ -69,5 +69,21 @@ public class Items {
 
     public void setSeller(String seller) {
         this.seller = seller;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getStock() {
+        return stock;
+    }
+
+    public void setStock(String stock) {
+        this.price = stock;
     }
 }

@@ -8,8 +8,16 @@ import java.util.ArrayList;
 
 public class ItemData {
     public static String[][] data = new String[][]{
-            {"Hosico", "Scottish Fold", "http://www.catster.com/wp-content/uploads/2017/02/Hosico1.png", "Russia", "Hosico is a representative of the breed Scottish Straight (Scottish Shorthair SFS 71). Hosico\\'s Diet consists of baby food - chicken with rice or buckwheat, beef with pumpkin or zucchini. He also eats dry food for cats. And almost every day he gets a fillet of raw turkey or beef. Normal Hosico\\'s weight is about 5 kg, in the winter it decreases to 4.5 kg. By the end of the summer he can score up to 5.5 kg."},
-            {"Guppy", "Fat Cat", "https://www.popdaily.com.tw/static/article/13308/1475472899tkx3j8.jpg", "Japan", "Fat Cat"}
+            {"Nike Epic React Flyknit",
+                    "Rp2.279.000",
+                    "5",
+                    "The Nike Epic React Flyknit Mens Running Shoe provides crazy comfort that lasts as long as you can run. Its Nike React foam cushioning is responsive yet lightweight, durable yet soft. This attraction of opposites creates a sensation that not only enhances the feeling of moving forwards, but makes running feel fun, too.",
+                    "US 7.5\\nUS 8\\nUS 10\\nUS 10.5\\nUS 13",
+                    "College Navy/Racer Blue/Pink Blast/College Navy\nWhite/Racer Blue/White\nBlack/Racer Blue/Black\nBlack/Dark Grey/Pure Platinum/Black\nWolf Grey/Cool Grey/Pure Platinum/White",
+                    "NIKE",
+                    "@drawable/epicreactflyknitrunningshoe",
+                    "@drawable/nike_logo"}
+
     };
     public static ArrayList<Items> getListData() {
         Items items = null;
@@ -17,7 +25,14 @@ public class ItemData {
         for (int i = 0; i < data.length; i++) {
             items = new Items();
             items.setName(data[i][0]);
-
+            items.setPrice(data[i][1]);
+            items.setStock(data[i][2]);
+            items.setDesc(data[i][3]);
+            items.setSizes(data[i][4]);
+            items.setColors(data[i][5]);
+            items.setSeller(data[i][6]);
+            items.setImg(data[i][7]);
+            items.setProfile(data[i][8]);
             list.add(items);
         }
 
