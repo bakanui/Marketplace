@@ -16,6 +16,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -86,12 +88,8 @@ public class SignupActivity extends AppCompatActivity {
         progressDialog.setMessage("Creating Account...");
         progressDialog.show();
 
-        String name = _nameText.getText().toString();
-        String address = _addressText.getText().toString();
         String email = _emailText.getText().toString();
-        String mobile = _mobileText.getText().toString();
         String password = _passwordText.getText().toString();
-        String reEnterPassword = _reEnterPasswordText.getText().toString();
 
         // TODO: Implement your own signup logic here.
         mAuth.createUserWithEmailAndPassword(email, password)
@@ -102,6 +100,16 @@ public class SignupActivity extends AppCompatActivity {
                             // If sign in fails, display a message to the user.
                             onSignupFailed();
                         } else {
+                            DatabaseReference mRef = FirebaseDatabase.getInstance().getReference();
+                            DatabaseReference usersRef = mRef.child("Users/" + mAuth.getCurrentUser().getUid());
+
+                            String name = _nameText.getText().toString();
+                            String address = _addressText.getText().toString();
+                            String mobile = _mobileText.getText().toString();
+
+                            usersRef.child("name").setValue(name);
+                            usersRef.child("address").setValue(address);
+                            usersRef.child("mobile").setValue(mobile);
                             // Sign in success, update UI with the signed-in user's information
                             onSignupSuccess();
                         }
