@@ -2,19 +2,14 @@ package com.vct.marketplace;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -23,7 +18,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.mikepenz.materialdrawer.DrawerBuilder;
 
 import java.util.ArrayList;
 
@@ -36,14 +30,14 @@ public class MainActivity extends AppCompatActivity
     private RecyclerView rvCategory;
     private ArrayList<Items> list;
 
+    public String name, email;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        DrawerUtil.getDrawer(this,toolbar);
 
         //DrawerLayout drawer = findViewById(R.id.drawer_layout);
         //ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -61,6 +55,7 @@ public class MainActivity extends AppCompatActivity
 
         //TextView userEmail = header.findViewById(R.id.userEmail);
         //userEmail.setText(user.getEmail());
+        email = user.getEmail();
 
         rvCategory = findViewById(R.id.rv_category);
         rvCategory.setHasFixedSize(true);
@@ -68,7 +63,7 @@ public class MainActivity extends AppCompatActivity
         list = new ArrayList<>();
         list.addAll(ItemData.getListData());
 
-        showRecyclerList();
+        showRecyclerGrid();
 
         DatabaseReference mRef = FirebaseDatabase.getInstance().getReference();
         DatabaseReference usersRef = mRef.child("Users/" + mAuth.getCurrentUser().getUid());
@@ -80,6 +75,9 @@ public class MainActivity extends AppCompatActivity
                 //View header = navigationView.getHeaderView(0);
                 //TextView userName = header.findViewById(R.id.userName);
                 //userName.setText(currentUser.getName());
+                name = currentUser.getName();
+                Toolbar toolbar = findViewById(R.id.toolbar);
+                DrawerUtil.getDrawer(MainActivity.this, toolbar, name, email);
             }
 
             @Override
@@ -87,6 +85,7 @@ public class MainActivity extends AppCompatActivity
 
             }
         });
+
     }
 
     @Override
@@ -168,9 +167,9 @@ public class MainActivity extends AppCompatActivity
 
     private void showRecyclerList(){
         rvCategory.setLayoutManager(new LinearLayoutManager(this));
-        ListItemAdapter listItemAdapter = new ListItemAdapter(this);
-        listItemAdapter.setListItems(list);
-        rvCategory.setAdapter(listItemAdapter);
+        ListSellerAdapter listSellerAdapter = new ListSellerAdapter(this);
+        listSellerAdapter.setListItems(list);
+        rvCategory.setAdapter(listSellerAdapter);
 
         ItemClickSupport.addTo(rvCategory).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
@@ -179,4 +178,23 @@ public class MainActivity extends AppCompatActivity
             }
         });
     }
+     private void showRecyclerGrid(){
+         rvCategory.setLayoutManager(new GridLayoutManager(this, 2));
+         GridItemAdapter gridItemAdapter = new GridItemAdapter(this);
+         gridItemAdapter.setListItem(list);
+         rvCategory.setAdapter(gridItemAdapter);
+
+         ItemClickSupport.addTo(rvCategory).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+             @Override
+             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                 showSelectedItem(list.get(position));
+             }
+         });
+     }
+     private void showRecyclerCardView(){
+         rvCategory.setLayoutManager(new LinearLayoutManager(this));
+         //CardViewPresidentAdapter cardViewPresidentAdapter = new CardViewPresidentAdapter(this);
+         //cardViewPresidentAdapter.setListPresident(list);
+        // rvCategory.setAdapter(cardViewPresidentAdapter);
+     }
 }

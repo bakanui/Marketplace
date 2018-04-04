@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * Created by bakan on 2/24/2018.
  */
 
-public class ListItemAdapter extends RecyclerView.Adapter<ListItemAdapter.CategoryViewHolder>{
+public class ListSellerAdapter extends RecyclerView.Adapter<ListSellerAdapter.CategoryViewHolder>{
     private Context context;
 
     public ArrayList<Items> getListItems() {
@@ -28,7 +28,7 @@ public class ListItemAdapter extends RecyclerView.Adapter<ListItemAdapter.Catego
 
     private ArrayList<Items> listItems;
 
-    public ListItemAdapter(Context context) {
+    public ListSellerAdapter(Context context) {
         this.context = context;
     }
 
